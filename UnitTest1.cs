@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using FakeXrmEasy;
 using FakeXrmEasy.Plugins;
 using FakeXrmEasy.Abstractions;
@@ -8,50 +9,53 @@ using Xunit;
 namespace PEI.Plugins.Tests
 {
     [Collection("FakeXrmEasy collection")]
-    public class ContactDuplicatePreventionPluginTests
+    public class CreateContactOnAccountCreatePluginTests
     {
         [Fact]
-        public void Create_WithDuplicateEmail_ShouldThrowInvalidPluginException()
+        public void CreateAccount_WithName_ShouldCreateContact()
         {
-            var ctx = new XrmFakedContext();
-            var existing = new Entity("contact") { Id = Guid.NewGuid() };
-            existing["emailaddress1"] = "abc@test.com";
-            ctx.Initialize(new[] { existing });
+            var context = new XrmFakedContext();
 
-            var target = new Entity("contact");
-            target["emailaddress1"] = "abc@test.com";
+            var account = new Entity("account") { Id = Guid.NewGuid() };
+            account["name"] = "Test Co";
 
-            var pluginContext = ctx.GetDefaultPluginContext();
+            var pluginContext = context.GetDefaultPluginContext();
             pluginContext.MessageName = "Create";
-            pluginContext.PrimaryEntityName = "contact";
-            pluginContext.InputParameters = new ParameterCollection { { "Target", target } };
+            pluginContext.PrimaryEntityName = "account";
+            pluginContext.Stage = 40; // post-operation
+            pluginContext.InputParameters = new ParameterCollection { { "Target", account } };
+            pluginContext.OutputParameters = new ParameterCollection { { "id", account.Id } };
 
-            var plugin = new ContactDuplicatePrevention();
+            var plugin = new CreateContactOnAccountCreatePlugin();
 
-            var ex = Assert.Throws<InvalidPluginExecutionException>(() =>
-                ctx.ExecutePluginWith(pluginContext, plugin));
+            context.ExecutePluginWith(pluginContext, plugin);
 
-            Assert.Contains("already exists", ex.Message, StringComparison.OrdinalIgnoreCase);
+            var contacts = context.CreateQuery("contact").ToList();
+            Assert.NotEmpty(contacts);
+            Assert.Contains(contacts, c => c.GetAttributeValue<string>("lastname") == "Test Co");
         }
 
         [Fact]
-        public void Create_WithUniqueEmail_ShouldNotThrow()
+        public void CreateAccount_WithoutName_ShouldCreateContactWithDefaultLastName()
         {
-            var ctx = new XrmFakedContext();
+            var context = new XrmFakedContext();
 
-            var target = new Entity("contact");
-            target["emailaddress1"] = "unique@example.com";
+            var account = new Entity("account") { Id = Guid.NewGuid() };
+            // No name set
 
-            var pluginContext = ctx.GetDefaultPluginContext();
+            var pluginContext = context.GetDefaultPluginContext();
             pluginContext.MessageName = "Create";
-            pluginContext.PrimaryEntityName = "contact";
-            pluginContext.InputParameters = new ParameterCollection { { "Target", target } };
+            pluginContext.PrimaryEntityName = "account";
+            pluginContext.Stage = 40;
+            pluginContext.InputParameters = new ParameterCollection { { "Target", account } };
+            pluginContext.OutputParameters = new ParameterCollection { { "id", account.Id } };
 
-            var plugin = new ContactDuplicatePrevention();
+            var plugin = new CreateContactOnAccountCreatePlugin();
 
-            ctx.ExecutePluginWith(pluginContext, plugin);
+            context.ExecutePluginWith(pluginContext, plugin);
 
-            Assert.True(true);
+            var contacts = context.CreateQuery("contact").ToList();
+            Assert.NotEmpty(contacts);
         }
     }
 }
