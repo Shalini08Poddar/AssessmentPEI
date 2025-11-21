@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactDuplicatePreventionPlugin", "ContactDuplicatePreventionPlugin.csproj", "{9C39C836-CA02-4C1C-B0D6-16DB4F019BF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateContactOnAccountCreationPlugin", "..\CreateContactonAccountCreationPlugin\CreateContactOnAccountCreationPlugin.csproj", "{39CC05C6-B51B-411C-80D7-2479320CFC96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactDuplicatePreventionPluginTests", "..\ContactDuplicatePreventionPluginTest\ContactDuplicatePreventionPluginTests.csproj", "{3EB73C5F-D892-491B-8686-E83C20CE8AAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateContactOnAccountCreationPluginTests", "..\CreateContactonAccountCreationPluginTest\CreateContactOnAccountCreationPluginTests.csproj", "{859C0EBB-790D-4320-91DD-47712E025A85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C39C836-CA02-4C1C-B0D6-16DB4F019BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C39C836-CA02-4C1C-B0D6-16DB4F019BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C39C836-CA02-4C1C-B0D6-16DB4F019BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C39C836-CA02-4C1C-B0D6-16DB4F019BF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CC05C6-B51B-411C-80D7-2479320CFC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CC05C6-B51B-411C-80D7-2479320CFC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CC05C6-B51B-411C-80D7-2479320CFC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CC05C6-B51B-411C-80D7-2479320CFC96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB73C5F-D892-491B-8686-E83C20CE8AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB73C5F-D892-491B-8686-E83C20CE8AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB73C5F-D892-491B-8686-E83C20CE8AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB73C5F-D892-491B-8686-E83C20CE8AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859C0EBB-790D-4320-91DD-47712E025A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859C0EBB-790D-4320-91DD-47712E025A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859C0EBB-790D-4320-91DD-47712E025A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859C0EBB-790D-4320-91DD-47712E025A85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5EDC836-49CA-4F85-8067-ED192FD409A4}
+	EndGlobalSection
+EndGlobal
